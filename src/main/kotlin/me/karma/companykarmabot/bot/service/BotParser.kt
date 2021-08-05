@@ -15,7 +15,7 @@ class BotParser(private val reviewService: ReviewService) : Logger {
                 else -> START_MESSAGE
             }
         } catch (e: Exception) {
-            log.error(e.message)
+            log.error(e.stackTraceToString())
             ERROR
         }
 

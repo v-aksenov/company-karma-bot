@@ -1,10 +1,10 @@
 package me.karma.companykarmabot.bot.model
 
+import me.karma.companykarmabot.utils.DATE_FORMAT
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
-import java.sql.Timestamp
-import java.time.Instant.now
+import java.util.*
 
 @Document
 data class Review(
@@ -13,12 +13,12 @@ data class Review(
     val title: String,
     val positive: Boolean = true,
     val comment: String,
-    val created: Timestamp = Timestamp.from(now())
+    val created: Calendar = Calendar.getInstance()
 ) {
 
     override fun toString(): String =
-        """Позитивный: $positive
-           Комментарий: $comment
-           Создан: $created
-        """.trimMargin()
+        """Компания: $title
+    Позитивный: $positive
+    Комментарий: $comment
+    Создан: ${DATE_FORMAT.format(created.time)}""".trimMargin()
 }
